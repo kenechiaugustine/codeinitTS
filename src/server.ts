@@ -1,8 +1,9 @@
 import dotenv from 'dotenv'
-
 dotenv.config({ path: './.env' })
 
 
+import DatabaseConnection from './utils/db.config' 
+// DatabaseConnection
 
 
 import app from './app'

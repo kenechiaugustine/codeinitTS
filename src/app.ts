@@ -4,10 +4,14 @@ import cors from 'cors';
 
 
 
+// INIT EXPRESS
+
 
 const app: Express = express()
 
 
+
+// MIDDLEWARES
 
 app.set('trust proxy', true)
 
@@ -20,15 +24,27 @@ app.use(express.json());
 
 
 
-app.get('/', (req:Request, res:Response, next: NextFunction) => {
-    res.send('Hello');
+// ROUTING / APP ENDPOINT
+
+app.get('/hello', (req:Request, res:Response, next: NextFunction) => {
+    res.status(200).json({
+
+        data: null,
+        message: "Hi mom"
+
+    });
 })
+
+// app.use('/user', user-route)
+
 
 
 
 app.all('*', (res: Response) => {
     res.send('Error occured...')
 })
+
+
 
 
 
