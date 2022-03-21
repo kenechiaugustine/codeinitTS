@@ -1,14 +1,17 @@
-import express, { Application } from 'express'
+import dotenv from 'dotenv'
 
-const app: Application = express()
-
-
+dotenv.config({ path: './.env' })
 
 
 
 
-app.listen(3001, () => console.log(`App running...`));
+import app from './app'
+
+const PORT = process.env.PORT || 3001
 
 
 
-console.log('Hello Typescript');
+
+// Server Start
+
+app.listen(PORT, () => console.log(`Application started...`));
