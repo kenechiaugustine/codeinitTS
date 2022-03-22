@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 ///////// M    O    N   G   O   D   B ///////////
 /////////////////////////////////////////////////
 
+
 const mongooseDB = async () => {
     try {
         mongoose.connect(`${process.env.DATABASE}`, {
@@ -33,7 +34,7 @@ const mongooseDB = async () => {
 ///////////// M    Y       S   Q   L ////////////
 /////////////////////////////////////////////////
 
-// pending...
+// coming soon...
 
 
 

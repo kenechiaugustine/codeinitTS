@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon --config nodemon.json src/server.ts",
+    "start": "node dist/server.js",
     "build": "tsc -p . && npm run copy:hbs ",
-    "copy:hbs": "copyfiles -u 1 src/**/*.hbs dist",
-    "start": "node dist/server.js"
+    "dev": "nodemon --config nodemon.json src/server.ts",
+    "copy:hbs": "copyfiles -u 1 src/**/*.hbs dist"
   },
   "repository": "https://github.com/kenechiaugustine/codeinitTS.git",
   "author": "Kene Arionye <kenechiaugustine@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",

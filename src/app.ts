@@ -6,7 +6,6 @@ import cors from 'cors';
 
 // INIT EXPRESS
 
-
 const app: Express = express()
 
 
@@ -24,24 +23,28 @@ app.use(express.json());
 
 
 
-// ROUTING / APP ENDPOINT
 
-app.get('/hello', (req:Request, res:Response, next: NextFunction) => {
-    res.status(200).json({
+// IMPORTING ROUTERS
 
-        data: null,
-        message: "Hi mom"
+import { userRouter }  from './.services/user/user.route'
 
-    });
-})
 
-// app.use('/user', user-route)
+// ROUTING / APP ENDPOINTS
+
+app.use('/api/user', userRouter)
 
 
 
 
-app.all('*', (res: Response) => {
-    res.send('Error occured...')
+
+app.all('*', (req:Request, res:Response, next: NextFunction) => {
+
+    return res.status(404).json({
+        message: "Error occured..."
+    })
+
+    next();
+
 })
 
 
