@@ -1,2 +1,2 @@
 # codeinitTS
-A code initializer for NodeJS/Express applications with Typescript
+Boilerplate for creating NodeJS/Express applications with Typescript
