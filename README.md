@@ -8,5 +8,5 @@ Boilerplate for creating NodeJS/Express applications with Typescript
 ### First clone the repo from github
 
 ```console
-$ git clone https://github.com/kenechiaugustine/codeinitTS.git
+git clone https://github.com/kenechiaugustine/codeinitTS.git
 ```
