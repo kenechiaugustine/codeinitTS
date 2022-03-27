@@ -1,5 +1,5 @@
 # codeinitTS
-Boilerplate for creating NodeJS/Express applications with Typescript
+Boilerplate code for creating NodeJS/Express applications with Typescript
 
 
 ## Installation
