@@ -18,7 +18,7 @@ const mongooseDB = async () => {
             console.log('Database connection was successful')
         })
     } catch (error) {
-        console.error(error)
+        console.error('Error 🔥: ',error)
     }
 
 }

@@ -26,14 +26,26 @@ app.use(express.json());
 
 // IMPORTING ROUTERS
 
-import { userRouter }  from './.services/user/user.route'
+import { authRouter } from './routes/auth.route';
+
+import { docRouter }  from './routes/doc.route'
 
 
 // ROUTING / APP ENDPOINTS
 
-app.use('/api/user', userRouter)
+// Index Route || Views Route
+app.all('/', (req: Request, res: Response) => {
+    return res.sendFile(__dirname + '/views/welcome.html')
+})
 
 
+// API ENDPOINTS
+// AUTH
+app.use('/api/auth', authRouter)
+
+
+// DOC
+app.use('/api/doc', docRouter)
 
 
 

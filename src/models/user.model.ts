@@ -4,8 +4,7 @@ const Schema = mongoose.Schema
 
 
 interface UserAttrs {
-    firstName: string;
-    lastName: string;
+    fullname: string;
     email: string;
     phone: string;
     password: string;
@@ -18,37 +17,35 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 
 export interface UserDoc extends mongoose.Document {
-    firstName: string;
-    lastName: string;
-    phone: string;
+    fullname: string;
     email: string;
+    phone: string;
     password: string
 }
 
 
 const userSchema = new Schema({
-
-    firstName: {
+    fullname: {
         type: String,
-        default: null
-    },
-    lastName: {
-        type: String,
-        default: null
-    },
-    phone: {
-        type: String,
-        default: null
-    },
-    isPhoneVerified: {
-        type: Boolean,
-        default: false
     },
     email: {
         type: String,
         unique: true,
         lowercase: true,
         trim: true,
+    },
+    phone: {
+        type: String,
+        default: null
+    },
+    role: {
+        type: String,
+        default: 'user',
+        enum : ['user', 'admin']
+    },
+    isPhoneVerified: {
+        type: Boolean,
+        default: false
     },
     password: {
         type: String,
@@ -73,5 +70,4 @@ userSchema.statics.build = (attrs: UserAttrs) => {
 
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 
-
-export { User }
+export { User };
