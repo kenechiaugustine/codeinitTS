@@ -1,17 +1,43 @@
 import dotenv from 'dotenv'
+
+process.on('uncaughtException', err => {
+    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
+
 dotenv.config({ path: './.env' })
 
-
-import DatabaseConnection from './utils/db.config' 
-// DatabaseConnection
-
-
+// Setup express server
 import app from './app'
+const server = require('http').createServer(app)
+
+// Connect to the database
+import DatabaseConnection from './utils/db.config'
+DatabaseConnection
+
+//
+
 
 const PORT = process.env.PORT || 3001
 
-
-
 // Server Start
+server.listen(PORT, () => console.log(`Application started 🚀 on port: ${PORT}...`));
 
-app.listen(PORT, () => console.log(`Application started 🚀 on port: ${PORT}...`));
+
+process.on('unhandledRejection', err => {
+    console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+    // @ts-ignore
+    console.log(err.name, err.message);
+    server.close(() => {
+        process.exit(1);
+    });
+});
+
+process.on('SIGTERM', () => {
+    console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+    server.close(() => {
+        console.log('💥 Process terminated!');
+    });
+});

@@ -14,11 +14,10 @@ const mongooseDB = async () => {
             // useCreateIndex: true
         });
         mongoose.connection.once('open', async () =>  {
-
             console.log('Database connection was successful')
         })
     } catch (error) {
-        console.error('Error 🔥: ',error)
+        console.error('Error 🔥: ', error)
     }
 
 }
