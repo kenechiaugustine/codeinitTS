@@ -20,7 +20,7 @@ app.engine('.hbs', engine({
     extname: '.hbs',
     // defaultLayout: `_base`,
     // defaultLayout: path.join(__dirname,`/views/layouts/_base`),
-    defaultLayout: false,
+    defaultLayout: '_base.hbs',
     layoutsDir: path.join(__dirname, 'views/layouts')
 }));
 app.set('view engine', '.hbs');
