@@ -1,4 +1,4 @@
-import express, { Application, Express, Request, Response, NextFunction } from 'express'
+import express, { Express, Request, Response, NextFunction } from 'express'
 import path from 'path'
 import helmet from 'helmet';
 import cors from 'cors';
@@ -14,6 +14,9 @@ const app: Express = express()
 
 // MIDDLEWARE
 app.set('trust proxy', true)
+
+
+console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
 
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
