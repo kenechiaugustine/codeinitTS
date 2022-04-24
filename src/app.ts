@@ -16,15 +16,18 @@ const app: Express = express()
 app.set('trust proxy', true)
 
 
-// console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
-console.log(`Main HEROKU File path::::::::::::::::\n ${__dirname}`)
+console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
+console.log(`Main File path::::::::::::::::\n ${__dirname}`)
+
+// LOCAL FILE MAIN PATH ====  C:\Workspace\Web dev\codeinitTS\dist
+// HEROKU FILE MAIN PATH ==== /app/dist
 
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
     extname: '.hbs',
     // defaultLayout: `_base`,
-    // defaultLayout: path.join(__dirname,`/views/layouts/_base`),
-    defaultLayout: '_base.hbs',
+    defaultLayout: path.join(__dirname,`/views/layouts/_base.hbs`),
+    // defaultLayout: '_base.hbs',
     layoutsDir: path.join(__dirname, 'views/layouts')
 }));
 app.set('view engine', '.hbs');
