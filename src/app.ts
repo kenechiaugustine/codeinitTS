@@ -16,7 +16,8 @@ const app: Express = express()
 app.set('trust proxy', true)
 
 
-console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
+// console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
+console.log(`Main HEROKU File path::::::::::::::::\n ${__dirname}`)
 
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
