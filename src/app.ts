@@ -19,7 +19,7 @@ app.set('trust proxy', true)
 app.engine('.hbs', engine({
     extname: '.hbs',
     // defaultLayout: `_base`,
-    defaultLayout: path.join(__dirname,`/views/layout/_base`),
+    defaultLayout: path.join(__dirname,`/views/layouts/_base`),
     // layoutsDir: path.join(__dirname, 'views/file_layout')
 }));
 app.set('view engine', '.hbs');
