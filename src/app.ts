@@ -2,10 +2,11 @@ import express, { Application, Express, Request, Response, NextFunction } from '
 import path from 'path'
 import helmet from 'helmet';
 import cors from 'cors';
-import { engine } from 'express-handlebars';
 import cookieParser from 'cookie-parser'
+import { engine } from 'express-handlebars'
 // @ts-ignore
 import xss from 'xss-clean'
+
 
 // INITIALIZE EXPRESS
 const app: Express = express()
@@ -18,10 +19,15 @@ app.set('trust proxy', true)
 app.engine('.hbs', engine({
     extname: '.hbs',
     defaultLayout: `_base`,
-    // layoutsDir: path.join(__dirname, 'views/filelayout')
+    // layoutsDir: path.join(__dirname, 'views/file_layout')
 }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
+
+
+/////////// STATIC FILES ///////////
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 /////////// C O R S ///////////
 app.use(cors());
@@ -29,8 +35,6 @@ app.use(cors());
 app.options('*', cors());
 
 
-/////////// STATIC FILES ///////////
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 /////// SECURITY HTTP HEADERS ///////
@@ -59,7 +63,8 @@ import { docRouter }  from './routes/doc.route';
 
 // Index Route || Views Route
 app.all('/', (req: Request, res: Response) => {
-    return res.sendFile(__dirname + '/views/welcome.html')
+    // return res.sendFile(__dirname + '/views/welcome.html')
+    res.render('welcome')
 })
 
 

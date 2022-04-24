@@ -7,12 +7,12 @@ import { Request, Response, NextFunction } from 'express';
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
     
+    console.log(process.env.JWT_SECRET)
+
     return res.status(200).json({
         message: 'Register user from this endpoint / func',
         data: null
     })
-    
-    next();
     
 }
 

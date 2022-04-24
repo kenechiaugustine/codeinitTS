@@ -6,7 +6,10 @@
     "start": "node dist/server.js",
     "build": "tsc -p . && npm run copy:hbs ",
     "dev": "nodemon --config nodemon.json src/server.ts",
-    "copy:hbs": "copyfiles -u 1 src/**/*.hbs src/**/*.html dist"
+    "copy:hbs": "copyfiles -u 1 src/**/*.hbs src/**/*.html src/**/*.css src/**/*.js dist",
+    "deploy": "npm run deploy:github && npm run deploy:heroku",
+    "deploy:github": "git push",
+    "deploy:heroku": "git push heroku main"
   },
   "repository": "https://github.com/kenechiaugustine/codeinitTS.git",
   "author": "Kene Arionye <kenechiaugustine@gmail.com>",

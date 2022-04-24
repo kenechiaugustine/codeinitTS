@@ -7,7 +7,6 @@ const Schema = mongoose.Schema
 interface UserAttrs {
     name: string;
     email: string;
-    phone: string;
     password: string;
 }
 
@@ -20,7 +19,6 @@ interface UserModel extends mongoose.Model<UserDoc> {
 export interface UserDoc extends mongoose.Document {
     name: string;
     email: string;
-    phone: string;
     password: string
 }
 
@@ -41,32 +39,33 @@ const userSchema = new Schema({
         type: String,
         default: null
     },
+    isPhoneVerified: {
+        type: Boolean,
+        default: false
+    },
     role: {
         type: String,
         default: 'user',
         enum : ['user', 'admin'],
     },
-    isPhoneVerified: {
-        type: Boolean,
-        default: false
-    },
     password: {
         type: String,
         default: null,
         required: true,
-        minlength: 8,
+        minlength: 4,
         select: false
     },
-    passwordChangedAt: Date,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
     active: {
       type: Boolean,
       default: true,
       select: false
-    }
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
 }, {
     timestamps: true,
+    collection: 'Users'
 });
 
 
