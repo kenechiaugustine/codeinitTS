@@ -16,19 +16,10 @@ const app: Express = express()
 app.set('trust proxy', true)
 
 
-console.log(`File path::::::::::::::::\n ${path.join(__dirname,'/views/layouts/_base.hbs')}`)
-console.log(`Main File path::::::::::::::::\n ${__dirname}`)
-
-// LOCAL FILE MAIN PATH ====  C:\Workspace\Web dev\codeinitTS\dist
-// HEROKU FILE MAIN PATH ==== /app/dist
-
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
     extname: '.hbs',
-    // defaultLayout: `_base`,
-    defaultLayout: path.join(__dirname,`/views/layouts/_base.hbs`),
-    // defaultLayout: '_base.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts')
+    defaultLayout: false
 }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -44,12 +35,11 @@ app.use(cors());
 app.options('*', cors());
 
 
-
-
 /////// SECURITY HTTP HEADERS ///////
 app.use(helmet());
 
 
+//////////// JSON ////////////
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
@@ -59,12 +49,9 @@ app.use(cookieParser());
 app.use(xss());
 
 
-
-
 // IMPORTING ROUTERS
 
 import { authRouter } from './routes/auth.route';
-
 import { docRouter }  from './routes/doc.route';
 
 
@@ -72,34 +59,28 @@ import { docRouter }  from './routes/doc.route';
 
 // Index Route || Views Route
 app.all('/', (req: Request, res: Response) => {
-    // return res.sendFile(__dirname + '/views/welcome.html')
     res.render('welcome')
 })
 
-
 // API ENDPOINTS
 // AUTH
-app.use('/api/auth', authRouter)
-
-
+app.use('/api/auth', authRouter) 
 // DOC
-app.use('/api/doc', docRouter)
+app.use('/api/doc', docRouter) 
 
-
-
+// 404 - ERROR HANDLING
 app.all('*', (req:Request, res:Response, next: NextFunction) => {
-
-    return res.status(404).json({
-        message: "Error occurred: Invalid Endpoint"
+    res.status(404).json({
+        status: 'error',
+        message: "Error occurred: Invalid Endpoint",
+        data: null
     })
-
-    next();
-
+    next()
+    return
 })
 
 
-
-
+/////////////////////
 
 
 export default app;

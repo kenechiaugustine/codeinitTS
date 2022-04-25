@@ -1,7 +1,5 @@
 import {Request, Response, NextFunction} from 'express'
 
-
-
 // @ts-ignore
 export function authorize(...roles) {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -12,10 +10,13 @@ export function authorize(...roles) {
 
         // check role privileges
         if (!roles.includes(user.role)) {
-            return res.status(403).json(`You can't access this route with your role: ${user.role}`);
+            return res.status(403).json({
+                status: 'error',
+                message: 'You are not authorized to access this resource',
+                data: null
+            });
         }
-
-        // call next
+        
         next()
     }
 }
