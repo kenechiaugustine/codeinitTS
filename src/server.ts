@@ -11,7 +11,10 @@ dotenv.config({ path: './.env' })
 
 // Setup express server
 import app from './app'
-const server = require('http').createServer(app)
+import { createServer } from 'http'
+
+const server = createServer(app)
+
 
 // Connect to the database
 import DatabaseConnection from './utils/db.config'

@@ -13,6 +13,8 @@ export const apiresponse = (statusCode: number, message: String = "", data: any,
         status,
         message,
         data
+        //results --> doc.length
+        //page --> current page
     });
 
     return;

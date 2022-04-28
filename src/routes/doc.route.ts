@@ -6,19 +6,19 @@ import * as doc from '../controllers/doc/doc.controller';
 
 
 // Get all users
-router.get('/users', doc.getUser);
+router.get('/users', doc.getUser)
 
 // Get one user
-router.get('/users/:id', doc.getOneUser);
+router.get('/users/:id', doc.getOneUser)
 
 // Create a new user
-router.post('/users', doc.createUser);
+router.post('/users', doc.createUser)
 
 // Update a user
-router.put('/users/:id', doc.updateUser);
+router.put('/users/:id', doc.updateUser)
 
 // Delete a  user
-router.delete('/users/:id', doc.deleteUser);
+router.delete('/users/:id', doc.deleteUser)
 
 
 
@@ -26,4 +26,4 @@ router.delete('/users/:id', doc.deleteUser);
 
 
 
-export { router as docRouter}
+export { router as docRouter }

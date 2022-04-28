@@ -14,7 +14,7 @@ const mongooseDB = async () => {
             // useCreateIndex: true
         });
         mongoose.connection.once('open', async () =>  {
-            console.log('Database connection was successful')
+            console.log('Database connection was successful\n::::::::::::::::::::::::::::::::::::::::::::::')
         })
     } catch (error) {
         console.error('Error 🔥: ', error)

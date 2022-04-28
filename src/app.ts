@@ -4,9 +4,13 @@ import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import { engine } from 'express-handlebars'
+import 'express-async-errors'
+
 // @ts-ignore
 import xss from 'xss-clean'
 
+
+import errorController from './errors/error.controller';
 
 // INITIALIZE EXPRESS
 const app: Express = express()
@@ -31,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /////////// C O R S ///////////
 app.use(cors());
-// @ts-ignore
+//@ts-ignore
 app.options('*', cors());
 
 
@@ -79,6 +83,10 @@ app.all('*', (req:Request, res:Response, next: NextFunction) => {
     return
 })
 
+
+/////////////////////
+
+app.use(errorController)
 
 /////////////////////
 

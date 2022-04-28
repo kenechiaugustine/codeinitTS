@@ -1,0 +1,10 @@
+
+# DOCS ENDPOINTS
+GET http://localhost:4001/api/doc/users
+
+
+
+GET http://localhost:4001/api/doc/users/adeffaaf
+
+
+
