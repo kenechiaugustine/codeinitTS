@@ -11,10 +11,9 @@ export const apiresponse = (statusCode: number, message: String = "", data: any,
 
     res.status(statusCode).json({
         status,
+        results: data.length,
         message,
         data
-        //results --> doc.length
-        //page --> current page
     });
 
     return;
