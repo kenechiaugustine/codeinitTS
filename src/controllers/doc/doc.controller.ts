@@ -5,10 +5,12 @@ import AppError from '../../errors/AppError';
 
 import AppQueryFeatures from '../../utils/AppQueryFeatures';
 
-export const getUser = async (req: Request, res: Response, next: NextFunction) => {
+import { apiresponse } from '../../utils/api.response';
+
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     let filter = {}
 
-    // if (req.params.id) filter = { user: req.params.id }
+    if (req.params.id) filter = { user: req.params.id }
 
     const features = new AppQueryFeatures(User.find(filter), req.query)
         .filter()
@@ -17,65 +19,53 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
         .paginate()
     //@ts-ignore
     const users = await features.query;
-    if (!users || users.length == 0) throw new AppError('Zero Record found', 400);
-    
-    return res.status(200).json({
-        message: "Success",
-        result: users.length,
-        data: users
-    })
-}
 
+    if (!users || users.length == 0) throw new AppError('Zero Record found', 400);
+
+    apiresponse(200, 'Users Record found', users, res);
+}
 
 export const getOneUser = async (req: Request, res: Response, next: NextFunction) => {
     let user = await User.findById(req.params.id)
 
     if (!user) throw new AppError('No user record found', 400)
 
-    res.status(200).json({
-        message: "Success",
-        data: user
-    })
+    apiresponse(200, 'User Record found', user, res);
 
 }
-
-
 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
     const newUser = await User.create(req.body)
 
-    res.status(201).json({
-        message: "Success",
-        data: newUser
-    })
+    apiresponse(201, 'User created', newUser, res);
 
     return;
 }
-
 
 export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
-    const user = await User.findByIdAndUpdate(req.params.id, req.body)
+    let user = await User.findById(req.params.id)
 
-    res.status(200).json({
-        message: "Success",
-        data: user
+    if (!user) throw new AppError('No user record found', 400)
+
+    user = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
     })
+
+    apiresponse(200, 'User updated', user, res);
 
     return;
 }
 
-
-
 export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 
-    await User.findByIdAndDelete(req.params.id)
+    const user = await User.findByIdAndDelete(req.params.id)
 
-    res.status(200).json({
-        message: "Success",
-        data: null
-    })
+    if (!user) throw new AppError('No user record found', 400)
+
+    apiresponse(200, 'User deleted', null, res);
 
     return;
 }

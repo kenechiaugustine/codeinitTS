@@ -11,6 +11,7 @@ import xss from 'xss-clean'
 
 
 import errorController from './errors/error.controller';
+import { apiresponse } from './utils/api.response';
 
 // INITIALIZE EXPRESS
 const app: Express = express()
@@ -57,6 +58,7 @@ app.use(xss());
 
 import { authRouter } from './routes/auth.route';
 import { docRouter }  from './routes/doc.route';
+import AppError from './errors/AppError';
 
 
 // ROUTING / APP ENDPOINTS
@@ -70,17 +72,13 @@ app.all('/', (req: Request, res: Response) => {
 // AUTH
 app.use('/api/auth', authRouter) 
 // DOC
-app.use('/api/doc', docRouter) 
+app.use('/api/doc', docRouter)
 
 // 404 - ERROR HANDLING
 app.all('*', (req:Request, res:Response, next: NextFunction) => {
-    res.status(404).json({
-        status: 'error',
-        message: "Error occurred: Invalid Endpoint",
-        data: null
-    })
-    next()
-    return
+    // throw new AppError(404, "Error occurred: Invalid Endpoint")
+    apiresponse(404, "Error occurred: Invalid Endpoint", null, res)
+    return;
 })
 
 

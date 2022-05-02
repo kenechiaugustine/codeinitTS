@@ -1,10 +1,29 @@
+@baseUrl = http://localhost:4001
 
-# DOCS ENDPOINTS
-GET http://localhost:4001/api/doc/users
+#### AUTH ENDPOINTS
+
+# Register a new user
+POST {{baseUrl}}/api/auth/register
+
+# Login a user
+POST {{baseUrl}}/api/auth/login
+
+# Logout a user
+POST {{baseUrl}}/api/auth/logout
 
 
+#### DOCS ENDPOINTS
 
-GET http://localhost:4001/api/doc/users/adeffaaf
+# GET ALL DOCS
+GET {{baseUrl}}/api/doc/users?limit=5
 
+# GET DOC BY ID
+GET {{baseUrl}}/api/doc/users/62666e9b5a3721aa59c9205a
+
+# CREATE DOC
+
+# UPDATE DOC
+
+# DELETE DOC
 
 

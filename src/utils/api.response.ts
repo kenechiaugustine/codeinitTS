@@ -9,9 +9,14 @@ export const apiresponse = (statusCode: number, message: String = "", data: any,
         status = "error"
     }
 
+    let results = data? data.length: 0
+
+
+    // Send Response
+
     res.status(statusCode).json({
         status,
-        results: data.length,
+        results,
         message,
         data
     });

@@ -6,7 +6,7 @@ import * as doc from '../controllers/doc/doc.controller';
 
 
 // Get all users
-router.get('/users', doc.getUser)
+router.get('/users', doc.getAllUsers)
 
 // Get one user
 router.get('/users/:id', doc.getOneUser)

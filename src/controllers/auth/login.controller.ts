@@ -2,46 +2,34 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { apiresponse } from '../../utils/api.response'
 import { User } from '../../models/user.model'
-
-
-const JWT_SECRET = "kene"
+import AppError from '../../errors/AppError'
 
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
 
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return apiresponse(400, 'Please provide email and password', null, res);
+    if (!email || !password) throw new AppError('Please provide email and password', 400);
+
+    const user = await User.findOne({ email }).select('+password');
+
+    //@ts-ignore
+    if (!user || !(await user.correctPassword(password, user.password))) {
+       throw new AppError('Incorrect email or password', 401);
     }
 
-    try {
-        const user = await User.findOne({ email })
+    //@ts-ignore
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+    res.cookie('token', token)
 
-        //.select('+password');
+    apiresponse(200, 'User logged in successfully', user, res);
 
-        //@ts-ignore
-        if (!user || !(await user.correctPassword(password, user.password))) {
-            return apiresponse(401, 'Incorrect email or password', null, res);
-        }
-
-        // Remove JWT_SECRET from response to prevent security breach. process.env.JWT_SECRET
-        const token = jwt.sign({ id: user._id }, JWT_SECRET)
-        res.cookie('token', token)
-
-        apiresponse(200, 'User logged in successfully', user, res);
-
-    } catch (error) {
-        console.log(error)
-        apiresponse(500, 'Error logging in user', null, res);
-    }
-
+    return;
 }
 
 
 export const loginWithGoogle = async (req: Request, res: Response, next: NextFunction) => {
-
     // Login users with google
     apiresponse(201, 'Login user with Google from this endpoint / func', null, res);
-
+    return
 }

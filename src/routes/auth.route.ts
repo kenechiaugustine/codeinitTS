@@ -25,15 +25,12 @@ router.post('/login/google', login.loginWithGoogle)
 router.post('/logout', logout)
 
 
-// Admin Simulation ---> Remove this later
-router.post('/admin', isLoggedIn, authorize('admin'), (req, res) => {
-    res.status(200).json({
-        status: 'ok',
-        message: 'You are welcome to the ADMIN area',
-        data: null
-    })
-})
+router.use(isLoggedIn)
 
+// Admin Simulation ---> Remove this later
+router.post('/admin', authorize('admin'), (req, res) => {
+    res.status(200).send('You are welcome to the ADMIN area')
+})
 
 
 
