@@ -4,7 +4,6 @@ const router: Router = express.Router();
 
 import * as doc from '../controllers/doc/doc.controller';
 
-
 // Get all users
 router.get('/users', doc.getAllUsers)
 

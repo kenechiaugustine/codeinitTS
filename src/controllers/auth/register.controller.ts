@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { User } from '../../models/user.model';
 import { apiresponse } from '../../utils/api.response';
+import { Email } from '../../utils/Email';
 
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,6 +17,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     res.cookie('token', token)
 
     // Send Welcome Email
+    // await new Email(user, url).send('welcome', `You're welcome to this Platform`)
     
     apiresponse(201, 'User created successfully', user, res);
 
