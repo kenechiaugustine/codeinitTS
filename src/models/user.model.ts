@@ -6,7 +6,8 @@ const Schema = mongoose.Schema
 
 
 interface UserAttrs {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
 }
@@ -18,16 +19,22 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 
 export interface UserDoc extends mongoose.Document {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string
 }
 
 
 const userSchema = new Schema({
-    name: {
+    firstName: {
         type: String,
-        required: [true, 'Name is required'],
+        required: [true, 'Your First-Name is required'],
+        trim: true
+    },
+    lastName: {
+        type: String,
+        required: [true, 'Your Last-Name is required'],
         trim: true
     },
     email: {
@@ -37,6 +44,10 @@ const userSchema = new Schema({
         trim: true,
         required: [true, 'Email is required'],
         validate: [validator.isEmail, 'Invalid email']
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false
     },
     phone: {
         type: String,
@@ -92,7 +103,6 @@ userSchema.pre('save', async function (next) {
     next();
 })
 
-
 userSchema.methods.correctPassword = async function (
     candidatePassword: string,
     userPassword: string
@@ -100,14 +110,9 @@ userSchema.methods.correctPassword = async function (
     return await bcrypt.compare(candidatePassword, userPassword);
 }
 
-
-
-
-
 userSchema.statics.build = (attrs: UserAttrs) => {
     return new User(attrs)
 }
-
 
 const User = mongoose.model<UserDoc, UserModel>("Users", userSchema);
 

@@ -14,7 +14,7 @@ export class Email {
         // @ts-ignore
         this.to = obj.email;
         // @ts-ignore
-        this.name = obj.name
+        this.firstName = obj.firstName
         // @ts-ignore
         this.url = url;
         // @ts-ignore
@@ -48,7 +48,7 @@ export class Email {
 
         const htmlTemplate = template({
             // @ts-ignore
-            name: this.name,
+            firstName: this.firstName,
         });
 
         const mailOptions = {
