@@ -49,6 +49,8 @@ export class Email {
         const htmlTemplate = template({
             // @ts-ignore
             firstName: this.firstName,
+            // @ts-ignore
+            url: this.url
         });
 
         const mailOptions = {

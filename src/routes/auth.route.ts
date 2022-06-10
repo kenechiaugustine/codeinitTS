@@ -8,6 +8,7 @@ import { authorize } from '../middlewares/authorize'
 import { logout } from '../controllers/auth/logout.controller'
 import * as login from '../controllers/auth/login.controller'
 import * as register from  '../controllers/auth/register.controller';
+import {initializeVerifyEmail, verifyEmail} from '../controllers/auth/email.controller'
 
 
 
@@ -23,6 +24,10 @@ router.post('/login/google', login.loginWithGoogle)
 
 // Logout
 router.post('/logout', logout)
+
+// Verify Email Endpoint
+router.post('/init-verify-email', initializeVerifyEmail )
+router.get('/verify-email', verifyEmail )
 
 
 router.use(isLoggedIn)
