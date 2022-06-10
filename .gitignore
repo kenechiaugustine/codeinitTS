@@ -1,7 +1,7 @@
 # custom
 package-lock.json
 .vscode
-
+pnpm-lock.yaml
 
 # Logs
 logs

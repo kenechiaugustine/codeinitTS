@@ -1,6 +1,11 @@
 
 // @ts-ignore
 import nodemailer from 'nodemailer'
+import AppError from '../errors/AppError';
+import exphbs from 'express-handlebars';
+import Handlebars from 'handlebars';
+import fs from 'fs';
+import path from 'path';
 
 export class Email {
 
@@ -9,7 +14,7 @@ export class Email {
         // @ts-ignore
         this.to = obj.email;
         // @ts-ignore
-        this.firstName = obj.firstName
+        this.name = obj.name
         // @ts-ignore
         this.url = url;
         // @ts-ignore
@@ -24,7 +29,7 @@ export class Email {
             port: process.env.SMTP_PORT,
             maxMessages: Infinity,
             debug: true,
-            secure: true,
+            // secure: true,
             auth: {
                 user: process.env.SMTP_USERNAME,
                 pass: process.env.SMTP_PASSWORD
@@ -36,23 +41,31 @@ export class Email {
     }
 
     // @ts-ignore
-    async send(template, subject) {
+    async send(hbs_template, subject) {
 
-        //
+        const source = fs.readFileSync(path.join(__dirname, `../views/email/${hbs_template}.hbs`), 'utf8');
+        const template = Handlebars.compile(source);
+
+        const htmlTemplate = template({
+            // @ts-ignore
+            name: this.name,
+        });
+
         const mailOptions = {
             // @ts-ignore
             from: this.from,
             // @ts-ignore
             to: this.to,
-            subject,
-            text: "Simple Email Message..."
-            // html,
-        }
+            subject: subject,
+            html: htmlTemplate
+        };
 
         // @ts-ignore
         await this.newTransport().sendMail(mailOptions, (err, info) => {
-            if(err){
-                //
+            if (err) {
+                // Return an Error If Error Occurs
+                console.log(err)
+                throw new AppError('Email encountered some problems', 400)
             }
         })
 

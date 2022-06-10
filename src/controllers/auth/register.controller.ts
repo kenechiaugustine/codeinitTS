@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-
 import { User } from '../../models/user.model';
 import { apiresponse } from '../../utils/api.response';
 import { Email } from '../../utils/Email';
@@ -16,8 +15,12 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
     res.cookie('token', token)
 
+
+    // Create Verification URL
+    const url = 'https://...'
+    
     // Send Welcome Email
-    // await new Email(user, url).send('welcome', `You're welcome to this Platform`)
+    await new Email(user, url).send('welcome-email', `You're welcome to this Platform`)
     
     apiresponse(201, 'User created successfully', user, res);
 
