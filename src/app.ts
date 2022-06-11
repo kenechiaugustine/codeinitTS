@@ -9,7 +9,6 @@ import 'express-async-errors'
 // @ts-ignore
 import xss from 'xss-clean'
 
-
 import errorController from './errors/error.controller';
 import { apiresponse } from './utils/api.response';
 
@@ -53,7 +52,6 @@ app.use(cookieParser());
 // Data sanitization against XSS
 app.use(xss());
 
-
 // IMPORTING ROUTERS
 
 import { authRouter } from './routes/auth.route';
@@ -64,7 +62,7 @@ import AppError from './errors/AppError';
 // ROUTING / APP ENDPOINTS
 
 // Index Route || Views Route
-app.all('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
     res.render('welcome')
 })
 
@@ -77,8 +75,7 @@ app.use('/api/doc', docRouter)
 // 404 - ERROR HANDLING
 app.all('*', (req:Request, res:Response, next: NextFunction) => {
     // throw new AppError(404, "Error occurred: Invalid Endpoint")
-    apiresponse(404, "Error occurred: Invalid Endpoint", null, res)
-    return;
+    return apiresponse(404, "Error occurred: Invalid Endpoint", null, res)
 })
 
 
