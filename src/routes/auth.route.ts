@@ -7,30 +7,37 @@ import { authorize } from '../middlewares/authorize'
 
 import { logout } from '../controllers/auth/logout.controller'
 import * as login from '../controllers/auth/login.controller'
-import * as register from  '../controllers/auth/register.controller';
-import {initializeVerifyEmail, verifyEmail} from '../controllers/auth/email.controller'
-
+import * as register from '../controllers/auth/register.controller';
+import { initializeVerifyEmail, verifyEmail } from '../controllers/auth/email.controller'
+import { forgotPassword, resetPassword, changePassword } from '../controllers/auth/password.controller'
 
 
 // Register
 router.post('/register', register.register);
 router.post('/register/google', register.registerWithGoogle);
 
-
 // Login
 router.post('/login', login.login)
 router.post('/login/google', login.loginWithGoogle)
 
-
 // Logout
 router.post('/logout', logout)
 
-// Verify Email Endpoint
-router.post('/init-verify-email', initializeVerifyEmail )
-router.get('/verify-email', verifyEmail )
+// Password Endpoint
+router.post('/forgot-password', forgotPassword)
+router.post('/reset-password', resetPassword)
 
-
+// Protected Routes
 router.use(isLoggedIn)
+
+// Verify Email Endpoint
+router.post('/init-verify-email', initializeVerifyEmail)
+router.get('/verify-email', verifyEmail)
+
+// Change Password Endpoint
+router.post('/change-password', changePassword)
+
+
 
 // Admin Simulation ---> Remove this later
 router.post('/admin', authorize('admin'), (req, res) => {
@@ -41,4 +48,4 @@ router.post('/admin', authorize('admin'), (req, res) => {
 
 
 
-export { router as authRouter}
+export { router as authRouter }

@@ -4,7 +4,7 @@ import { User } from "../../models/user.model";
 import jwt from "jsonwebtoken";
 import { Email } from "../../utils/Email";
 import { apiresponse } from "../../utils/api.response";
-import { decode } from "punycode";
+
 
 
 export const initializeVerifyEmail = async (req: Request, res: Response, next: NextFunction) => {
