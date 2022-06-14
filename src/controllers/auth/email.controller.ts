@@ -7,7 +7,7 @@ import { apiresponse } from "../../utils/api.response";
 
 
 
-export const initializeVerifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+export const sendVerificationEmail = async (req: Request, res: Response, next: NextFunction) => {
 
     const { email } = req.body;
     const user = await User.findOne({ email });

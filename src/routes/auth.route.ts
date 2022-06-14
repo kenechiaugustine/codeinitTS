@@ -8,7 +8,7 @@ import { authorize } from '../middlewares/authorize'
 import { logout } from '../controllers/auth/logout.controller'
 import * as login from '../controllers/auth/login.controller'
 import * as register from '../controllers/auth/register.controller';
-import { initializeVerifyEmail, verifyEmail } from '../controllers/auth/email.controller'
+import { sendVerificationEmail, verifyEmail } from '../controllers/auth/email.controller'
 import { forgotPassword, resetPassword, changePassword } from '../controllers/auth/password.controller'
 
 
@@ -31,7 +31,7 @@ router.post('/reset-password', resetPassword)
 router.use(isLoggedIn)
 
 // Verify Email Endpoint
-router.post('/init-verify-email', initializeVerifyEmail)
+router.post('/send-verification-email', sendVerificationEmail)
 router.get('/verify-email', verifyEmail)
 
 // Change Password Endpoint
