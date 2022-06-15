@@ -12,12 +12,15 @@ import { sendVerificationEmail, verifyEmail } from '../controllers/auth/email.co
 import { forgotPassword, resetPassword, changePassword } from '../controllers/auth/password.controller'
 
 
+import { validate } from '../middlewares/validate'
+import * as authValidator from '../validators/auth.validators'
+
 // Register
-router.post('/register', register.register);
+router.post('/register', validate(authValidator.register), register.register);
 router.post('/register/google', register.registerWithGoogle);
 
 // Login
-router.post('/login', login.login)
+router.post('/login', validate(authValidator.login), login.login)
 router.post('/login/google', login.loginWithGoogle)
 
 // Logout
@@ -28,11 +31,11 @@ router.post('/forgot-password', forgotPassword)
 router.post('/reset-password', resetPassword)
 
 // Protected Routes
-router.use(isLoggedIn)
+// router.use(isLoggedIn)
 
 // Verify Email Endpoint
-router.post('/send-verification-email', sendVerificationEmail)
-router.get('/verify-email', verifyEmail)
+router.post('/send-verification-email', validate(authValidator.sendVerificationEmail), sendVerificationEmail)
+router.get('/verify-email', validate(authValidator.verifyEmail), verifyEmail)
 
 // Change Password Endpoint
 router.post('/change-password', changePassword)
@@ -44,6 +47,9 @@ router.post('/admin', authorize('admin'), (req, res) => {
     res.status(200).send('You are welcome to the ADMIN area')
 })
 
+router.post('/valid', validate(authValidator.register), (req, res) => {
+    res.status(200).send('You are welcome to the VALIDATION area')
+})
 
 
 
