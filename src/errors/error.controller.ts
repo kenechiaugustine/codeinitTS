@@ -45,6 +45,10 @@ export = (err, req, res, next) => {
         error =  new AppError(message, 400);
     }
 
+    if (err.type === 'entity.parse.failed'){
+        error = new AppError('Invalid JSON data', 400)
+    }
+
     sendError(error, req, res, next)
 }
 
