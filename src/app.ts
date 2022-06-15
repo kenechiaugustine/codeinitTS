@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import { engine } from 'express-handlebars'
+import rateLimit from 'express-rate-limit'
 import 'express-async-errors'
 
 // @ts-ignore
@@ -23,7 +24,9 @@ app.set('trust proxy', true)
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
     extname: '.hbs',
-    defaultLayout: false
+    defaultLayout: '_base',
+    layoutsDir: path.join(__dirname, 'views'),
+    partialsDir: path.join(__dirname, 'views/components')
 }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -42,6 +45,15 @@ app.options('*', cors());
 /////// SECURITY HTTP HEADERS ///////
 app.use(helmet());
 
+/////// Rate limiter ///////////////
+const limiter = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    skipSuccessfulRequests: true,
+    message: 'Too many requests from this IP, please try again in an hour!'
+});
+app.use('/api', limiter);
+
 
 //////////// JSON ////////////
 app.use(express.json());
@@ -55,7 +67,7 @@ app.use(xss());
 // IMPORTING ROUTERS
 
 import { authRouter } from './routes/auth.route';
-import { docRouter }  from './routes/doc.route';
+import { docRouter } from './routes/doc.route';
 import AppError from './errors/AppError';
 
 
@@ -63,19 +75,22 @@ import AppError from './errors/AppError';
 
 // Index Route || Views Route
 app.get('/', (req: Request, res: Response) => {
-    res.render('welcome')
+    res.render('pages/welcome')
 })
 
 // API ENDPOINTS
 // AUTH
-app.use('/api/auth', authRouter) 
+app.use('/api/auth', authRouter)
 // DOC
 app.use('/api/doc', docRouter)
 
 // 404 - ERROR HANDLING
-app.all('*', (req:Request, res:Response, next: NextFunction) => {
-    // throw new AppError(404, "Error occurred: Invalid Endpoint")
-    return apiresponse(404, "Error occurred: Invalid Endpoint", null, res)
+// app.all('*', (req: Request, res: Response, next: NextFunction) => {
+//     throw new AppError("Error occurred: Invalid Endpoint", 404)
+// })
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    throw new AppError("Not Found", 404);
 })
 
 
