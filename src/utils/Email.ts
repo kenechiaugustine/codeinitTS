@@ -2,10 +2,11 @@
 // @ts-ignore
 import nodemailer from 'nodemailer'
 import AppError from '../errors/AppError';
-import exphbs from 'express-handlebars';
 import Handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
+// @ts-ignore
+import htmlToText from 'html-to-text'
 
 export class Email {
 
@@ -24,7 +25,7 @@ export class Email {
 
     private newTransport() {
         return nodemailer.createTransport({
-            service: process.env.SMTP_SERVICE,
+            // service: process.env.SMTP_SERVICE,
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
             maxMessages: Infinity,
@@ -59,7 +60,8 @@ export class Email {
             // @ts-ignore
             to: this.to,
             subject: subject,
-            html: htmlTemplate
+            html: htmlTemplate,
+            text: htmlToText.fromString(htmlTemplate)
         };
 
         // @ts-ignore
@@ -72,7 +74,4 @@ export class Email {
         })
 
     }
-
-
-
 }
