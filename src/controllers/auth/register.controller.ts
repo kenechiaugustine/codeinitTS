@@ -16,7 +16,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     res.cookie('token', token)
 
     // Create Verification URL
-    const url = 'https://...'
+    const url = `${req.protocol}://${req.get('host')}/api/auth/verify-email?token=${token}`
     
     // Send Welcome Email
     await new Email(user, url).send('welcome-email', `Welcome to this Platform`)
