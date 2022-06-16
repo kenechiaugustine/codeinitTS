@@ -20,6 +20,7 @@ const app: Express = express()
 // MIDDLEWARE
 app.set('trust proxy', true)
 
+app.enable('view cache');
 
 /////////// VIEW ENGINE ///////////
 app.engine('.hbs', engine({
