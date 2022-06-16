@@ -74,7 +74,7 @@ export const changePassword = async (req: Request, res: Response) => {
 
     await user.save();
 
-    return apiresponse(200, 'Password Updated', null, res);
+    return apiresponse(200, 'Password Changed', null, res);
 
 }
 
