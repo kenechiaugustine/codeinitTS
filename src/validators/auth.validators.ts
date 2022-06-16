@@ -41,6 +41,10 @@ export const resetPassword = {
     query: Joi.object().keys({
         token: Joi.string().required().email(),
     }),
+    body: Joi.object().keys({
+        email: Joi.string().required().email(),
+        newPassword: Joi.string().required().custom(password),
+    }),
 };
 
 export const sendVerificationEmail = {
@@ -52,5 +56,12 @@ export const sendVerificationEmail = {
 export const verifyEmail = {
     query: Joi.object().keys({
         token: Joi.string().required()
+    }),
+};
+
+export const changePassword = {
+    body: Joi.object().keys({
+        oldPassword: Joi.string().required().custom(password),
+        newPassword: Joi.string().required().custom(password),
     }),
 };

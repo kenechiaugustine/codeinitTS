@@ -27,24 +27,24 @@ router.post('/login/google', login.loginWithGoogle)
 router.post('/logout', logout)
 
 // Password Endpoint
-router.post('/forgot-password', forgotPassword)
-router.post('/reset-password', resetPassword)
+router.post('/forgot-password', validate(authValidator.forgotPassword), forgotPassword)
+router.post('/reset-password', validate(authValidator.resetPassword), resetPassword)
 
 // Protected Routes
-// router.use(isLoggedIn)
 
 // Verify Email Endpoint
-router.post('/send-verification-email', validate(authValidator.sendVerificationEmail), sendVerificationEmail)
-router.get('/verify-email', validate(authValidator.verifyEmail), verifyEmail)
+router.post('/send-verification-email', validate(authValidator.sendVerificationEmail), isLoggedIn, sendVerificationEmail)
+router.get('/verify-email', validate(authValidator.verifyEmail), isLoggedIn, verifyEmail)
 
 // Change Password Endpoint
-router.post('/change-password', changePassword)
+router.post('/change-password', validate(authValidator.changePassword), isLoggedIn, changePassword)
 
 
 
 // Admin Simulation ---> Remove this later
-router.post('/admin', authorize('admin'), (req, res) => {
-    res.status(200).send('You are welcome to the ADMIN area')
+router.post('/admin', isLoggedIn, authorize('admin'), (req, res) => {
+    // @ts-ignore
+    res.status(200).send({msg:'You are welcome to the ADMIN area', user: req.user})
 })
 
 router.post('/valid', validate(authValidator.register), (req, res) => {
