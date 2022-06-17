@@ -16,7 +16,8 @@
   "author": "Kene Arionye <kenechiaugustine@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.x"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
