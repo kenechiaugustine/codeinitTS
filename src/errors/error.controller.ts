@@ -49,6 +49,11 @@ export = (err, req, res, next) => {
         error = new AppError('Invalid JSON data', 400)
     }
 
+    if (err.name === 'MulterError') {
+       const message = err.message + ": " + err.field
+        error = new AppError(message, 400)
+    }
+
     sendError(error, req, res, next)
 }
 
