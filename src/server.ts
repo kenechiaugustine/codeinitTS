@@ -17,7 +17,7 @@ const server = createServer(app)
 
 
 // Connect to the database
-import DatabaseConnection from './utils/db.config'
+import DatabaseConnection from './config/db.config'
 DatabaseConnection
 
 //
