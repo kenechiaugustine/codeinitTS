@@ -15,6 +15,8 @@ import { forgotPassword, resetPassword, changePassword } from '../controllers/au
 import { validate } from '../middlewares/validate'
 import * as authValidator from '../validators/auth.validators'
 
+import uploader from '../utils/uploader'
+
 // Register
 router.post('/register', validate(authValidator.register), register.register);
 router.post('/register/google', register.registerWithGoogle);
@@ -49,6 +51,17 @@ router.post('/admin', isLoggedIn, authorize('admin'), (req, res) => {
 
 router.post('/valid', validate(authValidator.register), (req, res) => {
     res.status(200).send('You are welcome to the VALIDATION area')
+})
+
+
+
+
+router.post('/upload', uploader.single('images'), (req, res)=>{
+
+    // @ts-ignore
+    console.log(req.file)
+    res.send('Single file upload')
+
 })
 
 
