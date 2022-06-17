@@ -15,6 +15,9 @@
   "repository": "https://github.com/kenechiaugustine/codeinitTS.git",
   "author": "Kene Arionye <kenechiaugustine@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.30.0",
