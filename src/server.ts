@@ -6,7 +6,6 @@ process.on('uncaughtException', err => {
     process.exit(1);
 });
 
-
 dotenv.config({ path: './.env' })
 
 // Setup express server
@@ -15,19 +14,13 @@ import { createServer } from 'http'
 
 const server = createServer(app)
 
-
 // Connect to the database
 import DatabaseConnection from './config/db.config'
 DatabaseConnection
 
-//
-
-
 const PORT = process.env.PORT || 3001
-
 // Server Start
 server.listen(PORT, () => console.log(`Application started 🚀 on port: ${PORT}...`));
-
 
 process.on('unhandledRejection', err => {
     console.log('UNHANDLED REJECTION! 💥 Shutting down...');

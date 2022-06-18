@@ -1,11 +1,8 @@
 // import {Request, Response, NextFunction} from 'express'
 import AppError from './AppError'
 
-
-
 //@ts-ignore
 const sendError = (err, req, res, next) => {
-
     if (err.isOperational) {
         return res.status(err.statusCode).json({
             status: err.status,
@@ -23,7 +20,6 @@ const sendError = (err, req, res, next) => {
 
 //@ts-ignore
 export = (err, req, res, next) => {
-
     let error = { ...err }
     error.message = err.message
 
@@ -53,7 +49,5 @@ export = (err, req, res, next) => {
        const message = err.message + ": " + err.field
         error = new AppError(message, 400)
     }
-
     sendError(error, req, res, next)
 }
-

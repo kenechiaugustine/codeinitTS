@@ -8,8 +8,6 @@ export default class AppError extends Error {
         this.status = `${statusCode}`.startsWith('4') ? 'error' : 'failed'
         //@ts-ignore
         this.isOperational = true
-
-
         Error.captureStackTrace(this, this.constructor);
     }
 }

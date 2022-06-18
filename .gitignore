@@ -2,7 +2,7 @@
 package-lock.json
 .vscode
 pnpm-lock.yaml
-uploads
+
 
 # Logs
 logs

@@ -30,7 +30,7 @@ app.engine('.hbs', engine({
     partialsDir: path.join(__dirname, 'views/components')
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, '/../dist/views'));
+app.set('views', path.join(__dirname, 'views'));
 
 
 /////////// STATIC FILES ///////////
@@ -76,7 +76,9 @@ import AppError from './errors/AppError';
 
 // Index Route || Views Route
 app.get('/', (req: Request, res: Response) => {
-    res.render('index')
+    res.render('index', {
+        title: 'Home Page'
+    })
 })
 
 // API ENDPOINTS
@@ -91,7 +93,7 @@ app.use('/api/doc', docRouter)
 // })
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    throw new AppError("Not Found", 404);
+    throw new AppError("Page Not Found", 404);
 })
 
 

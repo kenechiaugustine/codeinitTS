@@ -11,14 +11,11 @@ export default class AppQuery {
         const queryObj = { ...this.queryString };
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete queryObj[el]);
-
         // 1B) Advanced filtering
         let queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-
         //@ts-ignore
         this.query = this.query.find(JSON.parse(queryStr));
-
         return this;
     }
 
@@ -33,7 +30,6 @@ export default class AppQuery {
             //@ts-ignore
             this.query = this.query.sort('-createdAt');
         }
-
         return this;
     }
 
@@ -48,7 +44,6 @@ export default class AppQuery {
             //@ts-ignore
             this.query = this.query.select('-__v');
         }
-
         return this;
     }
 
@@ -60,7 +55,6 @@ export default class AppQuery {
         const skip = (page - 1) * limit;
         //@ts-ignore
         this.query = this.query.skip(skip).limit(limit);
-
         return this;
     }
 }

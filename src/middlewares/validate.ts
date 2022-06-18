@@ -1,9 +1,10 @@
 import Joi from 'joi'
 import { pick } from '../utils/pick';
 import AppError from '../errors/AppError';
+import { Request, Response, NextFunction } from 'express';
 
 // @ts-ignore
-export const validate = (schema) => (req, res, next) => {
+export const validate = (schema) => (req: Request, res: Response, next: NextFunction) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);
   const object = pick(req, Object.keys(validSchema));
   const { value, error } = Joi.compile(validSchema)

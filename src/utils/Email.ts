@@ -9,7 +9,6 @@ import path from 'path';
 import htmlToText from 'html-to-text'
 
 export class Email {
-
     // @ts-ignore
     constructor(obj, url) {
         // @ts-ignore
@@ -21,7 +20,6 @@ export class Email {
         // @ts-ignore
         this.from = process.env.MAIL_FROM;
     }
-
 
     private newTransport() {
         return nodemailer.createTransport({
@@ -43,17 +41,14 @@ export class Email {
 
     // @ts-ignore
     async send(hbs_template, subject) {
-
-        const source = fs.readFileSync(path.join(__dirname, `../views/email/${hbs_template}.hbs`), 'utf8');
+        const source = fs.readFileSync(path.join(__dirname, `./email/${hbs_template}.hbs`), 'utf8');
         const template = Handlebars.compile(source);
-
         const htmlTemplate = template({
             // @ts-ignore
             firstName: this.firstName,
             // @ts-ignore
             url: this.url
         });
-
         const mailOptions = {
             // @ts-ignore
             from: this.from,
@@ -63,7 +58,6 @@ export class Email {
             html: htmlTemplate,
             text: htmlToText.fromString(htmlTemplate)
         };
-
         // @ts-ignore
         await this.newTransport().sendMail(mailOptions, (err, info) => {
             if (err) {
@@ -72,6 +66,5 @@ export class Email {
                 throw new AppError('Email encountered some problems', 400)
             }
         })
-
     }
 }

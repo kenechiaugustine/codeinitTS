@@ -1,6 +1,5 @@
 import Joi from "joi";
 
-
 // Custom Validations
 // @ts-ignore
 const password = (value, helpers) => {
@@ -12,7 +11,6 @@ const password = (value, helpers) => {
     }
     return value;
 };
-
 
 export const register = {
     body: Joi.object().keys({
@@ -29,7 +27,6 @@ export const login = {
         password: Joi.string().required().custom(password),
     }),
 };
-
 
 export const forgotPassword = {
     body: Joi.object().keys({

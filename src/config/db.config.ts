@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 
-
 /////////////////////////////////////////////////
 ///////// M    O    N   G   O   D   B ///////////
 /////////////////////////////////////////////////
-
 
 const mongooseDB = async () => {
     try {
@@ -19,29 +17,7 @@ const mongooseDB = async () => {
     } catch (error) {
         console.error('Error 🔥: ', error)
     }
-
 }
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////
-///////////// M    Y       S   Q   L ////////////
-/////////////////////////////////////////////////
-
-// coming soon...
-
-
-
-
-
-
-
 const DatabaseConnection = mongooseDB()
 
-
-export default DatabaseConnection 
+export default DatabaseConnection
