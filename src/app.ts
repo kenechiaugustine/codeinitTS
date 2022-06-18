@@ -30,7 +30,7 @@ app.engine('.hbs', engine({
     partialsDir: path.join(__dirname, 'views/components')
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, '/../dist/views'));
+app.set('views', path.join(__dirname, 'views'));
 
 
 /////////// STATIC FILES ///////////
@@ -76,7 +76,7 @@ import AppError from './errors/AppError';
 
 // Index Route || Views Route
 app.get('/', (req: Request, res: Response) => {
-    res.render('pages/welcome')
+    res.render('index')
 })
 
 // API ENDPOINTS
