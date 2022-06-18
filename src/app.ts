@@ -30,7 +30,7 @@ app.engine('.hbs', engine({
     partialsDir: path.join(__dirname, 'views/components')
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/../dist/views'));
 
 
 /////////// STATIC FILES ///////////
