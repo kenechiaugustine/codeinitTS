@@ -49,5 +49,14 @@ export = (err, req, res, next) => {
        const message = err.message + ": " + err.field
         error = new AppError(message, 400)
     }
+
+    if (err.name === 'JsonWebTokenError') {
+        error = new AppError('Invalid token.', 401);
+    }
+
+    if (err.name === 'TokenExpiredError') {
+        error = new AppError('Your token has expired!', 401);
+    }
+    
     sendError(error, req, res, next)
 }
