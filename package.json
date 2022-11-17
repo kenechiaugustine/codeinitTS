@@ -4,7 +4,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc -p . && npm run copyfiles ",
+    "build": "rimraf dist && tsc -p . && npm run copyfiles ",
     "prod": "npm run build && npm run start",
     "dev": "nodemon --config nodemon.json src/server.ts",
     "copyfiles": "copyfiles -u 1 src/**/*.hbs src/**/*.html src/**/*.css src/**/*.js dist",
