@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction } from 'express'
 import AppError from '../errors/AppError';
 
 // @ts-ignore
@@ -11,9 +11,9 @@ export function authorize(...roles) {
 
         // check role privileges
         if (!roles.includes(user.role)) {
-           throw new AppError('You are not authorized to access this resource!', 403);
+            throw new AppError('You are not authorized to access this resource!', 403);
         }
-        
+
         next()
     }
 }
