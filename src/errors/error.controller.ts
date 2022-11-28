@@ -16,8 +16,6 @@ const sendError = (err, req, res, next) => {
     return res.status(500).send('Something went very wrong!!');
 }
 
-
-
 //@ts-ignore
 export = (err, req, res, next) => {
     let error = { ...err }
@@ -38,15 +36,15 @@ export = (err, req, res, next) => {
         //@ts-ignore
         const errors = Object.values(err.errors).map(el => el.message);
         const message = `Invalid input data. ${errors.join('. ')}`;
-        error =  new AppError(message, 400);
+        error = new AppError(message, 400);
     }
 
-    if (err.type === 'entity.parse.failed'){
+    if (err.type === 'entity.parse.failed') {
         error = new AppError('Invalid JSON data', 400)
     }
 
     if (err.name === 'MulterError') {
-       const message = err.message + ": " + err.field
+        const message = err.message + ": " + err.field
         error = new AppError(message, 400)
     }
 
@@ -57,6 +55,6 @@ export = (err, req, res, next) => {
     if (err.name === 'TokenExpiredError') {
         error = new AppError('Your token has expired!', 401);
     }
-    
+
     sendError(error, req, res, next)
 }
