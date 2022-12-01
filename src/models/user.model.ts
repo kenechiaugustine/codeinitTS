@@ -69,7 +69,7 @@ const userSchema = new Schema({
         minlength: 4,
         select: false
     },
-    active: {
+    isActive: {
         type: Boolean,
         default: true,
         select: false
