@@ -38,7 +38,7 @@ export const changePassword = async (req: Request, res: Response) => {
     // @ts-ignore
     const user = await User.findOne({ email: req.user.email }).select('+password');
     if (!user) throw new AppError('User not found', 404);
-    // @ts-ignore
+    
     if (!(await user.correctPassword(oldPassword, user.password))) {
         throw new AppError('Your old password is wrong.', 401)
     }
