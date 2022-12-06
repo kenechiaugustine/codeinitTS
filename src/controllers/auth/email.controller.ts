@@ -1,5 +1,5 @@
 import AppError from "../../errors/AppError";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { User } from "../../models/user.model";
 import jwt from "jsonwebtoken";
 import { Email } from "../../utils/Email";
