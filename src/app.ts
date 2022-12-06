@@ -93,7 +93,7 @@ app.use('/api/doc', docRouter)
 // })
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    throw new AppError("Page Not Found", 404);
+    throw new AppError("Error occurred: Invalid Endpoint", 404);
 })
 
 
