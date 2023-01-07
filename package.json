@@ -16,7 +16,7 @@
   "author": "Kene Arionye <kenechiaugustine@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "14.x",
+    "node": "18.x",
     "npm": "8.x"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "nodemailer": "^6.7.5",
     "pm2": "^5.2.0",
     "pug": "^3.0.2",
+    "rimraf": "^3.0.2",
     "sharp": "^0.30.6",
     "slugify": "^1.6.5",
     "validator": "^13.7.0",
