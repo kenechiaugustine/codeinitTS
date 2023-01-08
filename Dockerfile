@@ -1,9 +1,13 @@
-#building an image of this auth ms
 FROM node:alpine
 
 WORKDIR ./
+
 COPY package.json .
+
 RUN npm install --only=prod
+
+RUN npm install -g typescript
+
 COPY . .
 
 RUN npm run build
