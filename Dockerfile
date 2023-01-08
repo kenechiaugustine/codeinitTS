@@ -1,7 +1,7 @@
 #building an image of this auth ms
 FROM node:alpine
 
-WORKDIR /app
+WORKDIR ./
 COPY package.json .
 RUN npm install --only=prod
 COPY . .
