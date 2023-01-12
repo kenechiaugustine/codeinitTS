@@ -7,7 +7,7 @@
     "build": "rimraf dist && tsc -p . && npm run copyfiles ",
     "prod": "npm run build && npm run start",
     "dev": "nodemon --config nodemon.json src/server.ts",
-    "copyfiles": "copyfiles -u 1 src/**/*.hbs src/**/*.html src/**/*.css src/**/*.js dist",
+    "copyfiles": "copyfiles -u 1 src/views/**/*.hbs src/**/*.hbs src/**/*.html src/**/*.css src/**/*.js dist",
     "deploy": "npm run deploy:github && npm run deploy:heroku",
     "deploy:github": "git push",
     "deploy:heroku": "git push heroku main"
