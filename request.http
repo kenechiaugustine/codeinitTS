@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:4001/api/
+
+# AUTH ENDPOINTS
+# Register a new user
+POST {{baseUrl}}auth/register
+Content-Type: application/json
+
+    {
+        "email": "kenechiaugustine@gmail.com",
+        "password":"password",
+        "firstName":"Kenechukwu",
+        "lastName":"Augustine"
+    }
+
+###
+
+# Login a user
+POST {{baseUrl}}auth/login
+Content-Type: application/json
+
+    {
+        "email": "kenechiaugustine@gmail.com",
+        "password":"password",
+    }
+
+###
+
+# Logout a user
+POST {{baseUrl}}auth/logout
+
+###
+
+# GET ALL DOCS
+GET {{baseUrl}}doc/users?limit=5
+
+###
+
+# GET DOC BY ID
+GET {{baseUrl}}doc/users/62f7c09cb96c15cd750ee7501
+

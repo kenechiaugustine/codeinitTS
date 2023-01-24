@@ -23,6 +23,7 @@ const mongooseDB = async () => {
     console.error('Error 🔥: ', error);
   }
 };
-const DatabaseConnection = mongooseDB();
 
-export default DatabaseConnection;
+export default {
+  DatabaseConnection: mongooseDB(),
+};

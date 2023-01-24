@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /codeinit
+WORKDIR /app
 
 COPY package.json .
 
