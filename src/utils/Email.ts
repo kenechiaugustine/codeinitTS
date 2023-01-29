@@ -1,12 +1,10 @@
 /** @format */
 
-// @ts-ignore
 import nodemailer from 'nodemailer';
 import AppError from '../errors/AppError';
 import Handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
-// @ts-ignore
 import htmlToText from 'html-to-text';
 
 export class Email {
