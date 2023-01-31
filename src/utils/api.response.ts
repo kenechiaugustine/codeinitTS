@@ -1,16 +1,21 @@
-import { Response } from "express";
+/** @format */
 
-export const apiresponse = (statusCode: number, message: String = "", data: any, res: Response) => {
-    let status = ""
-    if (statusCode >= 200 && statusCode < 300) status = "ok"
-    status = "error"
+import { Response } from 'express';
 
-    let results = data ? data.length : 0
-    // Send Response
-    return res.status(statusCode).json({
-        status,
-        results,
-        message,
-        data
-    });
-}
+export const apiresponse = (
+  statusCode: number,
+  message: String = '',
+  data: any,
+  res: Response
+) => {
+  const status = statusCode >= 200 && statusCode < 300 ? 'ok' : 'error';
+
+  const results = data ? data.length : 0;
+  // Send Response
+  return res.status(statusCode).json({
+    status,
+    results,
+    message,
+    data,
+  });
+};
