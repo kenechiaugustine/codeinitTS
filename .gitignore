@@ -3,6 +3,7 @@ package-lock.json
 .vscode
 pnpm-lock.yaml
 trash
+uploads
 
 # Logs
 logs

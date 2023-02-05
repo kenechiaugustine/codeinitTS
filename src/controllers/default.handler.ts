@@ -31,7 +31,7 @@ export const getAll =
 // Read one
 export const getOne =
   (Model: any, popOptions?: any) => async (req: Request, res: Response) => {
-    let query = Model.findById(req.params.id);
+    let query = Model.findOne({ _id: req.params.id });
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
     if (!doc || doc.length == 0) new AppError('No record found', 404);
@@ -55,7 +55,7 @@ export const deleteOne =
   (Model: any) => async (req: Request, res: Response) => {
     let doc = await Model.findById(req.params.id);
     if (!doc) throw new AppError('No record found', 400);
-    doc = await Model.findByIdAndUpdate(req.params.id, { isActive: false });
+    doc = await Model.findByIdAndUpdate(req.params.id, { isDeleted: true });
     return apiresponse(200, 'Deleted successfully', null, res);
   };
 
@@ -63,6 +63,6 @@ export const deleteOne =
 export const removeOne =
   (Model: any) => async (req: Request, res: Response) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
-    if (!doc) throw new AppError('No doc record found', 400);
+    if (!doc) throw new AppError('No record found', 400);
     return apiresponse(200, 'Removed successfully', null, res);
   };

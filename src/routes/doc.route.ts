@@ -1,21 +1,37 @@
 /** @format */
 
 import express, { Router } from 'express';
+
+// Controller
 import * as doc from '../controllers/doc/doc.controller';
-import { validate } from '../middlewares/validate';
-import * as authValidator from '../validators/auth.validators';
 
+// Utils
+import uploader from '../utils/uploader';
+
+// Router Definition
 const router: Router = express.Router();
+///////////////////////////////////////////////////
 
-// Get all users
-router.get('/users', doc.getAllUsers);
-// Get one user
-router.get('/users/:id', doc.getOneUser);
-// Create a new user
-router.post('/users', validate(authValidator.register), doc.createUser);
-// Update a user
-router.put('/users/:id', doc.updateUser);
-// Delete a  user
-router.delete('/users/:id', doc.deleteUser);
+router
+  .route('/users')
+  .get(doc.getAllUsers) // Get all users
+  .post(doc.createUser); // Create a user
 
+router
+  .route('/users/:id')
+  .get(doc.getOneUser) // Get one user
+  .put(doc.updateUser) // Update one user
+  .delete(doc.deleteUser); // Delete one user
+
+// Uploading single file
+router.post('/upload', uploader.single('images'), (req, res) => {
+  res.status(200).send({
+    status: 'ok',
+    message: 'Single file upload successful',
+    // @ts-ignore
+    data: req.file,
+  });
+});
+
+////////////////////////////////////////////////////
 export { router as docRouter };

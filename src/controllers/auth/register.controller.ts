@@ -1,10 +1,10 @@
 /** @format */
 
-import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '../../models/user.model';
+import { Request, Response } from 'express';
 import { apiresponse } from '../../utils/api.response';
 import { Email } from '../../utils/Email';
+import { User } from '../../models/user.model';
 
 export const register = async (req: Request, res: Response) => {
   const { email, password, firstName, lastName } = req.body;
@@ -17,16 +17,6 @@ export const register = async (req: Request, res: Response) => {
     'host'
   )}/api/auth/verify-email?token=${token}`;
   // Send Welcome Email
-  // await new Email(user, url).send('welcome-email', `Welcome to this Platform`)
-  return apiresponse(201, 'User created successfully', user, res);
-};
-
-export const registerWithGoogle = async (req: Request, res: Response) => {
-  // Register users with google
-  return apiresponse(
-    201,
-    'Register user with Google from this endpoint / func',
-    null,
-    res
-  );
+  // await new Email(user, url).send('welcome-email', `Welcome to this Platform`);
+  return apiresponse(201, 'User registered successfully', user, res);
 };

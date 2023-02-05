@@ -1,45 +1,82 @@
-import express, { Router } from 'express'
-import { isLoggedIn } from '../middlewares/isLoggedIn'
-import { authorize } from '../middlewares/authorize'
-import { logout } from '../controllers/auth/logout.controller'
-import * as login from '../controllers/auth/login.controller'
+/** @format */
+
+import express, { Router } from 'express';
+
+// Middlewares
+import * as auth from '../middlewares/auth';
+
+// Validation
+import { validate } from '../middlewares/validate';
+import * as authValidator from '../validators/auth.validators';
+
+// Controllers
 import * as register from '../controllers/auth/register.controller';
-import { sendVerificationEmail, verifyEmail } from '../controllers/auth/email.controller'
-import { forgotPassword, resetPassword, changePassword } from '../controllers/auth/password.controller'
-import { validate } from '../middlewares/validate'
-import * as authValidator from '../validators/auth.validators'
-import uploader from '../utils/uploader'
+import * as login from '../controllers/auth/login.controller';
+import { logout } from '../controllers/auth/logout.controller';
+import * as emailController from '../controllers/auth/email.controller';
+import * as passwordController from '../controllers/auth/password.controller';
 
-
+// Router Definition
 const router: Router = express.Router();
+/////////////////////////////////////////////////////
 
 // Register
 router.post('/register', validate(authValidator.register), register.register);
-router.post('/register/google', register.registerWithGoogle);
+
 // Login
-router.post('/login', validate(authValidator.login), login.login)
-router.post('/login/google', login.loginWithGoogle)
+router.post('/login', validate(authValidator.login), login.login);
+
 // Logout
-router.post('/logout', logout)
-// Password Endpoint
-router.post('/forgot-password', validate(authValidator.forgotPassword), forgotPassword)
-router.post('/reset-password', validate(authValidator.resetPassword), resetPassword)
-// Verify Email Endpoint
-router.post('/send-verification-email', validate(authValidator.sendVerificationEmail), isLoggedIn, sendVerificationEmail)
-router.get('/verify-email', validate(authValidator.verifyEmail), isLoggedIn, verifyEmail)
-// Change Password Endpoint
-router.post('/change-password', validate(authValidator.changePassword), isLoggedIn, changePassword)
+router.post('/logout', logout);
 
-// Admin Simulation ---> Remove this later
-router.post('/admin', isLoggedIn, authorize('admin'), (req, res) => {
-    // @ts-ignore
-    res.status(200).send({msg:'You are welcome to the ADMIN area', user: req.user})
-})
-// Uploading File Endpoint
-router.post('/upload', uploader.single('images'), (req, res)=>{
-    // @ts-ignore
-    console.log(req.file)
-    res.send('Single file upload')
-})
+// Forgot password
+router.post(
+  '/forgot-password',
+  validate(authValidator.forgotPassword),
+  passwordController.forgotPassword
+);
 
-export { router as authRouter }
+// Reset password
+router.post(
+  '/reset-password',
+  validate(authValidator.resetPassword),
+  passwordController.resetPassword
+);
+
+// Send verification email
+router.post(
+  '/send-verification-email',
+  validate(authValidator.sendVerificationEmail),
+  auth.isLoggedIn,
+  emailController.sendVerificationEmail
+);
+
+// Verify email
+router.post(
+  '/verify-email',
+  validate(authValidator.verifyEmail),
+  auth.isLoggedIn,
+  emailController.verifyEmail
+);
+
+// Change Password
+router.post(
+  '/change-password',
+  validate(authValidator.changePassword),
+  auth.isLoggedIn,
+  passwordController.changePassword
+);
+
+// Admin Simulation
+router.post('/admin', auth.isLoggedIn, auth.authorize('admin'), (req, res) => {
+  // @ts-ignore
+  res.status(200).send({
+    status: 'ok',
+    message: 'You are welcome to the ADMIN area',
+    // @ts-ignore
+    user: req.user,
+  });
+});
+
+////////////////////////////////////////////////////
+export { router as authRouter };

@@ -1,7 +1,7 @@
 /** @format */
 
-import { User } from '../../models/user.model';
 import * as doc from './../default.handler';
+import { User } from '../../models/user.model';
 
 export const getAllUsers = doc.getAll(User);
 
