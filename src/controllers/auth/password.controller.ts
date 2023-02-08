@@ -16,7 +16,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
   const url = `${req.protocol}://${req.get(
     'host'
   )}/api/auth/reset-password?token=${token}`;
-  // await new Email(user, url).send('reset-password', 'Reset your password');
+  await new Email(user, url).send('reset-password', 'Reset your password');
   console.log(url);
   return apiresponse(200, 'Reset Password Link Sent to Email', null, res);
 };

@@ -19,7 +19,7 @@ export const sendVerificationEmail = async (req: Request, res: Response) => {
     'host'
   )}/api/auth/verify-email?token=${token}`;
   // Send token to user's email
-  //   await new Email(user, url).send('verify-email', 'Verify Your Email');
+  await new Email(user, url).send('verify-email', 'Verify Your Email');
   console.log(url);
   return apiresponse(200, 'Verification email sent', null, res);
 };

@@ -17,6 +17,6 @@ export const register = async (req: Request, res: Response) => {
     'host'
   )}/api/auth/verify-email?token=${token}`;
   // Send Welcome Email
-  // await new Email(user, url).send('welcome-email', `Welcome to this Platform`);
+  await new Email(user, url).send('welcome-email', `Welcome to this Platform`);
   return apiresponse(201, 'User registered successfully', user, res);
 };
