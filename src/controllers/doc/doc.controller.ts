@@ -11,4 +11,4 @@ export const createUser = doc.createOne(User);
 
 export const updateUser = doc.updateOne(User);
 
-export const deleteUser = doc.removeOne(User);
+export const deleteUser = doc.deleteOne(User);

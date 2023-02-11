@@ -3,7 +3,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import AppError from '../../errors/AppError';
-import { apiresponse } from '../../utils/api.response';
+import { apiresponse } from '../../utils/response';
 import { User } from '../../models/user.model';
 
 export const login = async (req: Request, res: Response) => {
