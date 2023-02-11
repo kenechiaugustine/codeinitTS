@@ -30,6 +30,7 @@
     "html-to-text": "^8.2.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "koii": "^3.1.0",
     "mongoose": "^6.2.7",
     "multer": "1.4.5-lts.1",
     "mysql": "^2.18.1",
@@ -45,7 +46,6 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.7",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
@@ -53,6 +53,7 @@
     "@types/html-to-text": "^9.0.0",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.21",
+    "@types/nodemailer": "^6.4.7",
     "@types/nodemailer-smtp-transport": "^2.7.5",
     "@types/validator": "^13.7.2",
     "copyfiles": "^2.4.1",

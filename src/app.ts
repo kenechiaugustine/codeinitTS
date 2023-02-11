@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import { engine } from 'express-handlebars';
 import rateLimit from 'express-rate-limit';
 import 'express-async-errors';
+import koii from 'koii';
 
 // @ts-ignore
 import xss from 'xss-clean';
@@ -94,6 +95,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // app.all('*', (req: Request, res: Response, next: NextFunction) => {
 //     throw new AppError("Error occurred: Invalid Endpoint", 404)
 // })
+
+app.use(koii);
 
 // Global Error Handler Middleware
 app.use(errorController);
