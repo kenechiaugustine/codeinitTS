@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import AppError from '../errors/AppError';
 import { apiresponse } from '../utils/response';
-import AppQuery from '../utils/query';
+import AppQuery, { QueryString } from '../utils/query';
 
 // Create
 export const createOne =
@@ -15,14 +15,14 @@ export const createOne =
 // Read all
 export const getAll =
   (Model: any, docField?: any) => async (req: Request, res: Response) => {
-    let filter = {};
-    if (req.params.id) filter = { docField: req.params.id };
-    const features = new AppQuery(Model.find(filter), req.query)
+    let filter: { [key: string]: any } = {};
+    if (req.params.id) filter = { [docField]: req.params.id };
+    const features = new AppQuery(Model.find(filter), req.query as QueryString)
       .filter()
       .sort()
       .limitFields()
       .paginate();
-    //@ts-ignore
+      
     const docs = await features.modelQuery;
     if (!docs || docs.length == 0) throw new AppError('No record found', 400);
     return apiresponse(200, `All Record found`, docs, res);
