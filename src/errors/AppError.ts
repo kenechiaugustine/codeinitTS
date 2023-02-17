@@ -1,13 +1,14 @@
+/** @format */
 export default class AppError extends Error {
-    //@ts-ignore
-    constructor(message, statusCode) {
-        super(message);
-        //@ts-ignore
-        this.statusCode = statusCode
-        //@ts-ignore
-        this.status = `${statusCode}`.startsWith('4') ? 'error' : 'failed'
-        //@ts-ignore
-        this.isOperational = true
-        Error.captureStackTrace(this, this.constructor);
-    }
+  statusCode: number;
+  status: string;
+  isOperational: boolean;
+
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+    this.status = `${statusCode}`.startsWith('4') ? 'error' : 'failed';
+    this.isOperational = true;
+    Error.captureStackTrace(this, this.constructor);
+  }
 }
