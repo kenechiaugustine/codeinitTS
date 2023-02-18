@@ -1,10 +1,14 @@
 /** @format */
 
-// import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import AppError from './AppError';
 
-//@ts-ignore
-const sendError = (err, req, res, next) => {
+const sendError: ErrorRequestHandler = (
+  err: AppError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (err.isOperational) {
     return res.status(err.statusCode).json({
       status: err.status,
@@ -12,14 +16,14 @@ const sendError = (err, req, res, next) => {
     });
   }
 
-  // console.log(JSON.stringify(err))
-  // console.log(err.name)
   console.log(err);
-  return res.status(500).send('Something went very wrong!!!');
+  return res.status(500).json({
+    status: err.status,
+    message: 'Something went very wrong!!!',
+  });
 };
 
-//@ts-ignore
-export = (err, req, res, next) => {
+export = (err: any, req: Request, res: Response, next: NextFunction) => {
   let error = { ...err };
   error.message = err.message;
 
@@ -35,8 +39,7 @@ export = (err, req, res, next) => {
   }
 
   if (err.name === 'ValidationError') {
-    //@ts-ignore
-    const errors = Object.values(err.errors).map((el) => el.message);
+    const errors = Object.values(err.errors).map((el: any) => el.message);
     const message = `Invalid input data. ${errors.join('. ')}`;
     error = new AppError(message, 400);
   }
