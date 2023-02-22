@@ -70,6 +70,7 @@ app.use(xss());
 import { authRouter } from './routes/auth.route';
 import { docRouter } from './routes/doc.route';
 import AppError from './errors/AppError';
+import { CustomError, GlobalErrorHandler } from './errors/fashy-error';
 
 // ROUTING / APP ENDPOINTS
 // Index Route || Views Route
@@ -87,7 +88,7 @@ app.use('/api/doc', docRouter);
 
 // 404 - ERROR HANDLING
 app.use((req: Request, res: Response, next: NextFunction) => {
-  throw new AppError('Error occurred: Invalid Endpoint', 404);
+  throw new CustomError('Error occurred: Invalid Endpoint', 404);
 });
 
 // OR
@@ -99,6 +100,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(koii);
 
 // Global Error Handler Middleware
-app.use(errorController);
+app.use(GlobalErrorHandler);
 
 export default app;
