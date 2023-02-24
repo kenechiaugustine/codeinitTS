@@ -70,7 +70,7 @@ app.use(xss());
 import { authRouter } from './routes/auth.route';
 import { docRouter } from './routes/doc.route';
 import AppError from './errors/AppError';
-import { CustomError, GlobalErrorHandler } from './errors/fashy-error';
+import { CustomError, GlobalErrorHandler } from 'fashy-errors';
 
 // ROUTING / APP ENDPOINTS
 // Index Route || Views Route
