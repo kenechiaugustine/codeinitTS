@@ -13,8 +13,6 @@ import koii from 'koii';
 // @ts-ignore
 import xss from 'xss-clean';
 
-import errorController from './errors/error.controller';
-
 // INITIALIZE EXPRESS
 const app: Express = express();
 
