@@ -1,5 +1,3 @@
-/** @format */
-
 import * as doc from './../default.handler';
 import { User } from '../../models/user.model';
 

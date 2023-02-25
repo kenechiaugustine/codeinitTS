@@ -1,5 +1,3 @@
-/** @format */
-
 import { Response, Request } from 'express';
 import { apiresponse } from '../../utils/response';
 

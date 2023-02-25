@@ -1,5 +1,3 @@
-/** @format */
-
 import Joi from 'joi';
 import { pick } from '../utils/pick';
 import AppError from '../errors/AppError';

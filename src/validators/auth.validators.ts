@@ -1,5 +1,3 @@
-/** @format */
-
 import Joi from 'joi';
 
 // Custom Validations

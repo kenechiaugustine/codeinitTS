@@ -1,5 +1,3 @@
-/** @format */
-
 import express, { Express, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import helmet from 'helmet';

@@ -1,5 +1,3 @@
-/** @format */
-
 import { Request, Response } from 'express';
 import AppError from '../errors/AppError';
 import { apiresponse } from '../utils/response';
@@ -22,7 +20,7 @@ export const getAll =
       .sort()
       .limitFields()
       .paginate();
-      
+
     const docs = await features.modelQuery;
     if (!docs || docs.length == 0) throw new AppError('No record found', 400);
     return apiresponse(200, `All Record found`, docs, res);

@@ -1,5 +1,3 @@
-/** @format */
-
 import mongoose, { Query } from 'mongoose';
 
 export interface QueryString {

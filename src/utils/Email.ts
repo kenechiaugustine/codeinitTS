@@ -1,5 +1,3 @@
-/** @format */
-
 import nodemailer from 'nodemailer';
 import AppError from '../errors/AppError';
 import Handlebars from 'handlebars';

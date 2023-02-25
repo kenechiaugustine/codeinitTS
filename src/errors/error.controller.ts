@@ -1,5 +1,3 @@
-/** @format */
-
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import AppError from './AppError';
 

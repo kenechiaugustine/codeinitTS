@@ -1,5 +1,3 @@
-/** @format */
-
 import dotenv from 'dotenv';
 
 process.on('uncaughtException', (err) => {

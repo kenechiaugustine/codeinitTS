@@ -1,5 +1,3 @@
-/** @format */
-
 import express, { Router } from 'express';
 
 // Controller
