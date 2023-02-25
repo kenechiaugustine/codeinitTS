@@ -96,7 +96,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //     throw new CustomError("Error occurred: Invalid Endpoint", 404)
 // })
 
-app.use(koii);
+// app.use(koii);
 
 // Global Error Handler Middleware
 app.use(GlobalErrorHandler);
