@@ -68,7 +68,7 @@ router.post(
 );
 
 // Admin Simulation
-router.post('/admin', auth.isLoggedIn, auth.authorize('admin'), (req, res) => {
+router.get('/admin', auth.isLoggedIn, auth.authorize('admin'), (req, res) => {
   // @ts-ignore
   res.status(200).send({
     status: 'ok',
