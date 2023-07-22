@@ -13,6 +13,7 @@ import * as login from '../controllers/auth/login.controller';
 import { logout } from '../controllers/auth/logout.controller';
 import * as emailController from '../controllers/auth/email.controller';
 import * as passwordController from '../controllers/auth/password.controller';
+import { Email } from '../utils/Email';
 
 // Router Definition
 const router: Router = express.Router();
@@ -73,6 +74,22 @@ router.get('/admin', auth.isLoggedIn, auth.authorize('admin'), (req, res) => {
     message: 'You are welcome to the ADMIN area',
     // @ts-ignore
     user: req.user,
+  });
+});
+
+// Sample Email sending route
+router.post('/send-email', async (req, res) => {
+  await new Email(
+    {
+      email: 'kenechiaugustine@gmail.com',
+      firstName: 'Kenechukwu',
+    },
+    'https://XXXXXXX.com/verify-email?token=XXXXXXX'
+  ).send('base', 'welcome to the platform');
+
+  res.status(200).send({
+    status: 'ok',
+    message: 'Email sent successfully',
   });
 });
 
